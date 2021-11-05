@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define max 5
+#define max 9
 void Print(vector<vector<int>> Matrix){
     for(int i=0;i<Matrix.size();i++){ 
     for(int j=0;j<Matrix[i].size();j++)
@@ -15,11 +15,11 @@ void Print(vector<int> Matrix){
 }
 class point{
     public:
-    int i=-1;
-    int j=-1;
+    int i;
+    int j;
     int dist=0;
 point(int i,int j,int dist){
-    this->i;this->j=j;this->dist=dist;
+    this->i=i;this->j=j;this->dist=dist;
 }
 };
 class Maze{
@@ -50,11 +50,17 @@ public:
     }
     int Traverse_BFS(int i, int j){
        // cout<<i<<' '<<j<<endl;
+       //
         point p(i,j,0);
         q.push(p);
+
+        Visited[p.i][p.j]=true;
+
         while(!q.empty()){
+            //exit(0);
             p=q.front();
             q.pop();
+            //cout<<p.i<<' '<<p.j<<endl;
             if(Matrix[p.i][p.j]==2) return p.dist;
             //go up
             if(Is_Safe(p.i+1,p.j))  { 
@@ -86,11 +92,15 @@ int main(){
     bool Success;
     vector<vector<int>> Matrix
     {
-    {0,0,0,0,0},
-    {0,1,0,0,0},
-    {0,0,3,0,3},
-    {0,0,3,2,0},
-    {0,0,3,0,0}
+    {0,0,0,0,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,0,3,3,3,3,3,0},
+    {0,0,0,3,2,0,0,0,3},
+    {0,0,0,3,3,3,3,3,3},
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0},
     };
     vector<vector<bool>> Visited(max,vector<bool>(max,false));
     Maze Jojo(Matrix,Visited);
