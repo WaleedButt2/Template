@@ -30,7 +30,7 @@ public:
         //exit(0);
     }
     bool Is_Safe(int i,int j){
-        return (i-1>=0&&j-1>=0&&j+1<Matrix[i].size()&&i+1<Matrix.size()&&!Visited[i][j]&&Matrix[i][j]!=3);
+        return (i>=0&&j>=0&&j<Matrix[i].size()&&i<Matrix.size()&&!Visited[i][j]&&Matrix[i][j]!=3);
     }
     bool Traverse_DFS(){
         bool Flag=false; 
@@ -59,7 +59,7 @@ public:
         //go right
         if(Is_Safe(i,j+1))  Traverse_DFS(i,j+1,x,shortest);
         //shortest=-1;
-        
+        Visited[i][j]=false;
         return;
     }
     void Traverse_DFS(int i, int j,bool &Flag){
@@ -76,6 +76,7 @@ public:
         if(Is_Safe(i,j-1))  Traverse_DFS(i,j-1,Flag);
         //go right
         if(Is_Safe(i,j+1))  Traverse_DFS(i,j+1,Flag);
+        Visited[i][j]=false;
         return;
     }
 };
